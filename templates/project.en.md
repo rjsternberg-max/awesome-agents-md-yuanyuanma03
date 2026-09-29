@@ -1,7 +1,7 @@
 # AGENTS.md — {{PROJECT_NAME}}
 
 > The operating manual for AI coding agents in this repo: commands first, explicit boundaries, keep it lean.
-> Generated from the [AGENTS.md template collection](https://github.com/YOUR_GITHUB_NAME/AGENTS.md). Edit to match your project.
+> Generated from the [AGENTS.md template collection](https://github.com/YuanyuanMa03/AGENTS.md). Edit to match your project.
 
 ## Project Context
 

@@ -1,67 +1,74 @@
-# AGENTS.md
+# Awesome AGENTS.md
 
-English | **[中文](README.md)**
-
-> The **unofficial best-practices companion** to the [AGENTS.md](https://agents.md/) spec: practices, layered templates, and a generator/linter CLI.
-> Make Codex, Claude Code, Cursor, Gemini CLI, and every other coding agent actually understand your project.
-
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![CI](https://img.shields.io/badge/CI-github--actions-blue)](.github/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-> The official spec answers *what AGENTS.md is* — this repo answers *how to write a good one*.
+English | **[中文](README.md)**
 
-## Why this exists
+> A curated list for AGENTS.md / CLAUDE.md: spec · practices · templates · tools · real-world examples · research.
+> Community-driven, unofficial companion to the [agents.md](https://agents.md/) spec — the spec answers *what it is*, this list answers *how to use it well*.
 
-Without a rules file, every agent session starts from a blank page. With a bloated one, every session wastes context: an ETH Zurich study measured **20–23% higher inference cost** from context files, and LLM-generated (unreviewed) files even *reduced* resolution rates.
+**More than a list** — this repo ships ready-to-use assets:
 
-This repo turns community-proven habits into three layers of ready-to-use assets:
-
-| Asset | What it is | Start here |
-|---|---|---|
-| 📖 Practices | 10 evidence-backed rules + 12 anti-patterns + memory-system patterns | [docs/best-practices.md](docs/best-practices.md) |
-| 📝 Templates | Global + project layers (zh/en), React/Python/Go/monorepo worked examples, composable snippets | [templates/](templates/) |
-| 🔧 `amd` CLI | Zero-dependency bash: `init` generates, `check` lints | [tools/amd.sh](tools/amd.sh) |
+| Asset | What it is |
+| --- | --- |
+| 📖 [Practices (中文)](docs/best-practices.md) | 10 evidence-backed rules · [12 anti-patterns](docs/anti-patterns.md) · [4 memory-system patterns](docs/memory-patterns.md) |
+| 📝 [Templates](templates/) | Global/project layers (zh/en) · React·Python·Go·monorepo worked examples · composable snippets |
+| 🔧 [amd CLI](tools/amd.sh) | Zero-dependency bash: `init` generates an AGENTS.md, `check` lints it (secrets & full-indirection detection) |
 
 ## Quick start
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_NAME/AGENTS.md.git
-
-cd /path/to/your-project
-bash /path/to/AGENTS.md/tools/amd.sh init     # interactive generator (zh/en)
-
-bash /path/to/AGENTS.md/tools/amd.sh check    # lint your existing AGENTS.md
+# One-liner generator (zero dependencies)
+bash <(curl -fsSL https://raw.githubusercontent.com/YuanyuanMa03/awesome-agents-md/main/tools/amd.sh) init
 ```
 
-No installation needed — `amd` only requires bash, grep, sed, and awk.
+## Contents
 
-## The 10 practices (TL;DR)
+- [Official](#official) · [Guides](#guides) · [First-hand posts](#first-hand-posts) · [Real-world](#real-world) · [Tools](#tools) · [Research](#research) · [Discussions](#discussions)
 
-1. **Layer it**: global = personal prefs, project = commands & conventions, per-package in monorepos (nearest file wins)
-2. **Commands first**, with flags — the most-referenced content
-3. **Prefer single-file checks** over full builds
-4. **A real snippet beats three paragraphs** — point at actual files in the repo
-5. **Three-tier boundaries**: ✅ Always / ⚠️ Ask first / 🚫 Never
-6. **Name stack + versions**: "React 18 + TS 5", not "a React project"
-7. **Add a rule on the second mistake** — rules come from real friction
-8. **Stay lean**: under 500 lines (Cursor's guidance); every rule costs tokens
-9. **Reference, don't redirect**: full-indirection stubs get ignored by agents
-10. **Rules + memory, two tracks**: rules for "how", memory for "what happened"
+## Official
 
-Full details with sources: [docs/best-practices.md](docs/best-practices.md) · anti-patterns: [docs/anti-patterns.md](docs/anti-patterns.md) · memory: [docs/memory-patterns.md](docs/memory-patterns.md)
+- [agents.md](https://agents.md/) — the official spec site; "a README for agents", adopted by 60,000+ projects
+- [agentsmd/agents.md](https://github.com/agentsmd/agents.md) — the spec repository
+- [OpenAI Codex docs](https://developers.openai.com/codex/) — Codex reads AGENTS.md natively; global `~/.codex/AGENTS.md` vs project layer
 
-## Real-world examples
+## Guides
 
-What production AGENTS.md files look like — including a breakdown of `openai/codex`'s nested structure: [docs/real-world-examples.md](docs/real-world-examples.md).
+- [How to write a great agents.md — Lessons from 2,500+ repositories](https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories/) — GitHub Blog: commands first, snippets over prose, ✅/⚠️/🚫 boundaries, six core sections
+- [Improve your AI code output with AGENTS.md](https://www.builder.io/blog/agents-md) — Builder.io: file-scoped commands, add-a-rule-on-the-second-mistake, point at real example files, nested files
+- [Anatomy of our CLAUDE.md file](https://www.superconductor.com/blog/anatomy-of-claude-md) — Superconductor: the 9-section structure, fast/slow command tiers
+- [Agent Skills vs Rules Files vs Retrieved Context](https://getunblocked.com/blog/agent-skills-vs-rules-files/) — rules vs skills vs retrieved context; Cursor's <500-line guidance
+
+## First-hand posts
+
+- [Boris Cherny (creator of Claude Code), 13 tips](https://x.com/bcherny/status/2007179832300581177) — team-shared CLAUDE.md in git, add a rule on every mistake
+- [gmoneyNFT: 25 things I learned using Claude Code daily](https://x.com/gmoneyNFT/status/2022454519741767800) — CLAUDE.md as the agent's brain; SOUL/AGENTS/TOOLS/USER split; two-track memory
+- [Henry Castro @henryxcastro](https://x.com/henryxcastro) — limits of AGENTS.md and rule-following; cursor2claude
+
+## Real-world
+
+- [openai/codex AGENTS.md](https://github.com/openai/codex/blob/main/AGENTS.md) — nested structure, crate naming rules, named hard boundaries ("Never … `CODEX_SANDBOX_*`")
+- [Adopters list](https://agents.md/) — major projects using the standard, linked at the bottom of the official site
+
+## Tools
+
+- [amd](tools/amd.sh) — this repo's CLI: `init` / `check`, zero dependencies
+- [claude-os](https://github.com/nathanieltn/claude-os) — open-source two-track memory (daily logs + curated MEMORY.md)
+
+## Research
+
+- [Evaluating AGENTS.md (ETH Zurich / LogicStar)](https://arxiv.org/abs/2602.11988) — human-written files ≈ +4% resolution, +20–23% inference cost; LLM-generated unreviewed files −0.5–2%; keep them minimal
+
+## Discussions
+
+- [HN: Support AGENTS.md](https://news.ycombinator.com/item?id=49367350) — `.cursor/rules` vs `CLAUDE.md`; full-indirection stubs get randomly ignored
 
 ## Contributing
 
-New stack templates, snippets, real-world examples, translations, and detection rules are all welcome — see [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Acknowledgments
-
-Distilled from the Claude Code team's practices, GitHub's analysis of 2,500+ repositories, Builder.io, Superconductor, and ETH Zurich research. Full source list: [docs/research-sources.md](docs/research-sources.md).
+Links, stack templates, snippets, real-world examples, and detection rules are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). Full source list: [docs/research-sources.md](docs/research-sources.md).
 
 ## License
 

@@ -5,7 +5,7 @@
 
 ## 项目背景
 
-- 本仓库是 AGENTS.md 规范的非官方最佳实践伴侣：文档 + 模板库 + `amd` CLI。
+- 本仓库是 awesome-agents-md：AGENTS.md/CLAUDE.md 的精选资源清单（awesome list）+ 中文最佳实践文档 + 模板库 + `amd` CLI，agents.md 官方规范的非官方伴侣。
 - 技术栈：Markdown 文档 + 零依赖 bash（兼容 macOS bash 3.2）。无 Node 运行时依赖（markdownlint 仅经 npx 在 CI 使用）。
 
 ## 常用命令

@@ -31,4 +31,4 @@
 
 ## 提交新案例
 
-用 [issue 模板「案例提交」](https://github.com/YOUR_GITHUB_NAME/AGENTS.md/issues/new/choose) 提交，需包含：仓库链接、你认为值得学的一到三个点、你的 GitHub ID（用于在表中署名）。
+用 [issue 模板「案例提交」](https://github.com/YuanyuanMa03/AGENTS.md/issues/new/choose) 提交，需包含：仓库链接、你认为值得学的一到三个点、你的 GitHub ID（用于在表中署名）。

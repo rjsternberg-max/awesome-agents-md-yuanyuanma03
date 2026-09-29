@@ -1,92 +1,88 @@
-# AGENTS.md
+# Awesome AGENTS.md
 
-**[English](README.en.md)** | 中文
-
-> AGENTS.md 规范的**非官方最佳实践伴侣**：最佳实践 · 分层模板 · 一键生成与体检工具。
-> 让 Codex / Claude Code / Cursor / Gemini CLI 等所有 AI 编程代理真正读懂你的项目。
-
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![CI](https://img.shields.io/badge/CI-github--actions-blue)](.github/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-> 官方规范（"AGENTS.md 是什么"）请看 [agents.md](https://agents.md/)；本仓库回答的是"**怎么写好它**"。
+**[English](README.en.md)** | 中文
 
-## 为什么需要这个仓库
+> AGENTS.md / CLAUDE.md 精选资源清单：官方规范 · 最佳实践 · 模板 · 工具 · 真实案例 · 学术研究。
+> 社区驱动、非官方的 [agents.md](https://agents.md/) 规范伴侣——官方回答"是什么"，这里回答"**怎么用好**"。
 
-没有规则文件，agent 每次启动都是一张白纸；写错了规则文件，agent 每次启动都在浪费上下文——ETH Zurich 实测：臃肿的规则文件让推理成本上升 20–23%，LLM 一键生成未精修的文件甚至让解题率**下降**。
+**不只是清单**：本仓库自带一套可即用的资产——
 
-本仓库把社区验证过的写法整理成**拿来即用的三层资产**：
-
-| 资产 | 说明 | 入口 |
-|---|---|---|
-| 📖 最佳实践 | 十条实证规则 + 12 个反模式 + 记忆系统模式 | [docs/best-practices.md](docs/best-practices.md) |
-| 📝 模板库 | 全局层 / 项目层（中英双语）+ React·Python·Go·Monorepo 技术栈范例 + 可组合片段 | [templates/](templates/) |
-| 🔧 `amd` CLI | 零依赖 bash：`init` 交互式生成，`check` 给现有文件体检 | [tools/amd.sh](tools/amd.sh) |
+| 资产 | 说明 |
+| --- | --- |
+| 📖 [中文最佳实践](docs/best-practices.md) | 十条实证规则 · [12 个反模式](docs/anti-patterns.md) · [记忆系统四种模式](docs/memory-patterns.md) |
+| 📝 [模板库](templates/) | 全局层 / 项目层（中英）· React·Python·Go·Monorepo 范例 · 可组合片段 |
+| 🔧 [amd CLI](tools/amd.sh) | 零依赖 bash：`init` 交互式生成 AGENTS.md，`check` 体检（检测密钥泄露、整体转发反模式等） |
 
 ## 快速开始
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_NAME/AGENTS.md.git
-cd AGENTS.md
+# 一键为你的项目生成 AGENTS.md（零依赖）
+bash <(curl -fsSL https://raw.githubusercontent.com/YuanyuanMa03/awesome-agents-md/main/tools/amd.sh) init
 
-# 1. 为你的项目生成 AGENTS.md（交互式问答，中英双语可选）
-cd /path/to/your-project
-bash /path/to/AGENTS.md/tools/amd.sh init
-
-# 2. 给现有规则文件做体检（检测密钥泄露、整体转发反模式、膨胀、含糊人设等）
-bash /path/to/AGENTS.md/tools/amd.sh check
+# 或克隆后使用
+git clone https://github.com/YuanyuanMa03/awesome-agents-md.git
+bash awesome-agents-md/tools/amd.sh init    # 交互式生成
+bash awesome-agents-md/tools/amd.sh check   # 体检现有 AGENTS.md
 ```
 
-不需要安装任何东西——`amd` 只依赖 bash、grep、sed、awk。
+## 目录
 
-## 十条最佳实践（速览）
+- [官方规范](#官方规范)
+- [最佳实践指南](#最佳实践指南)
+- [一手帖子（X/Twitter）](#一手帖子xtwitter)
+- [真实案例](#真实案例)
+- [工具](#工具)
+- [学术研究](#学术研究)
+- [社区讨论](#社区讨论)
+- [贡献](#贡献)
 
-1. **分层**：全局放个人偏好，项目放构建命令，monorepo 各包各放一份（就近原则）
-2. **命令写最前**：带参数写全，这是 agent 引用最频繁的内容
-3. **单文件命令优先**：`tsc --noEmit file.ts` 几秒，全量构建几分钟
-4. **一段真实代码胜过三段描述**：直接指向仓库内的范例文件
-5. **边界三级标注**：✅ Always / ⚠️ Ask first / 🚫 Never（Never commit secrets 是实测最有效约束）
-6. **技术栈写到版本号**："React 18 + TS 5"，不是"React 项目"
-7. **第二次犯错才写规则**：规则来自真实摩擦，不是预先设计
-8. **保持精简**：Cursor 建议少于 500 行；每条规则都有真实 token 成本
-9. **拆分引用要有度**：核心规则留主文件，整体转发会被 agent 忽略
-10. **规则 + 记忆双轨**：规则管"怎么做"，记忆管"发生过什么"
+## 官方规范
 
-展开与出处：[docs/best-practices.md](docs/best-practices.md) · 反模式：[docs/anti-patterns.md](docs/anti-patterns.md) · 记忆系统：[docs/memory-patterns.md](docs/memory-patterns.md)
+- [agents.md](https://agents.md/) — 官方规范站："a README for agents"，开放标准，60,000+ 开源项目采用
+- [agentsmd/agents.md](https://github.com/agentsmd/agents.md) — 规范源仓库
+- [OpenAI Codex 文档](https://developers.openai.com/codex/) — Codex 原生读取 AGENTS.md；全局层 `~/.codex/AGENTS.md` 与项目层的约定
 
-## 模板库
+## 最佳实践指南
 
-| 模板 | 用途 | 语言 |
-|---|---|---|
-| [global.zh.md](templates/global.zh.md) / [global.en.md](templates/global.en.md) | 全局层：`~/.codex/AGENTS.md` 等位置，个人偏好 | 中 / 英 |
-| [project.zh.md](templates/project.zh.md) / [project.en.md](templates/project.en.md) | 项目层骨架（`amd init` 的底稿） | 中 / 英 |
-| [stacks/react-typescript.md](templates/stacks/react-typescript.md) | React 18 + TS + Vite 完整范例 | 英 |
-| [stacks/python.md](templates/stacks/python.md) | Python 3.12 + uv + FastAPI 完整范例 | 英 |
-| [stacks/go.md](templates/stacks/go.md) | Go 1.23 完整范例 | 英 |
-| [stacks/monorepo.md](templates/stacks/monorepo.md) | Monorepo 根目录 + 子包嵌套范例 | 中英混排 |
-| [snippets.zh.md](templates/snippets.zh.md) / [snippets.en.md](templates/snippets.en.md) | 可组合片段：边界 / 测试 / PR 清单 / 单文件命令… | 中 / 英 |
+- [How to write a great agents.md: Lessons from over 2,500 repositories](https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories/) — GitHub 官方博客（2025-11）：命令写最前、一段代码示例胜过三段描述、✅/⚠️/🚫 三级边界、六大板块
+- [Improve your AI code output with AGENTS.md](https://www.builder.io/blog/agents-md) — Builder.io：单文件命令、第二次犯错才写规则、指向真实示例文件、嵌套 AGENTS.md
+- [Anatomy of our CLAUDE.md file](https://www.superconductor.com/blog/anatomy-of-claude-md) — Superconductor：9 节结构模板，快慢命令分档，"越短越好"
+- [Agent Skills vs Rules Files vs Retrieved Context](https://getunblocked.com/blog/agent-skills-vs-rules-files/) — getunblocked：规则文件 vs Skills vs 检索式上下文的取舍；Cursor 建议规则 <500 行
+- [本仓库中文实践](docs/best-practices.md) — 上述内容的中文提炼，附 [反模式](docs/anti-patterns.md) 与 [记忆系统模式](docs/memory-patterns.md)
 
-## `amd` CLI
+## 一手帖子（X/Twitter）
 
-```bash
-amd init [--lang zh|en] [--name NAME] [--with-pr-checklist] [--yes] [--force]
-amd check [files...]     # 默认检查 ./AGENTS.md
-amd help
-```
-
-`check` 会检测：**密钥泄露**（FAIL）· **整体转发反模式**（FAIL）· 超过 500 行（WARN）· 没有可执行命令（WARN）· 含糊人设（WARN）· 缺少显式边界（WARN）。
+- [Boris Cherny（Claude Code 作者）的 13 条 tips](https://x.com/bcherny/status/2007179832300581177) — 团队共享 CLAUDE.md 进 git，做错就加规则；plan mode 起步；/rewind 大胆试错
+- [gmoneyNFT：25 things I learned using Claude Code every day](https://x.com/gmoneyNFT/status/2022454519741767800) — CLAUDE.md 即大脑；第二次犯错即写入规则；SOUL/AGENTS/TOOLS/USER 文件分工；记忆双轨制
+- [Henry Castro @henryxcastro](https://x.com/henryxcastro) — AGENTS.md 的局限与规则遵循问题、cursor2claude 规则迁移工具
 
 ## 真实案例
 
-生产环境中的 AGENTS.md 长什么样：[docs/real-world-examples.md](docs/real-world-examples.md)（含 openai/codex 官方仓库的嵌套结构解析）。
+- [openai/codex 的 AGENTS.md](https://github.com/openai/codex/blob/main/AGENTS.md) — 嵌套结构范本：crate 命名规则、点名的硬边界（"Never … `CODEX_SANDBOX_*`"）、工具依赖前置
+- [agents.md 采用者列表](https://agents.md/) — 标准官网底部的主流采用项目
+- [本仓库案例解析](docs/real-world-examples.md) — openai/codex 结构逐条拆解
+
+## 工具
+
+- [amd](tools/amd.sh) — 本仓库出品：`init` 生成 / `check` 体检（密钥泄露与整体转发判 FAIL），零依赖
+- [claude-os](https://github.com/nathanieltn/claude-os) — 记忆双轨制（每日日志 + 精选 MEMORY.md）的开源实现
+
+## 学术研究
+
+- [Evaluating AGENTS.md: Are repository-level context files effective?](https://arxiv.org/abs/2602.11988) — ETH Zurich / LogicStar：人写文件平均 +4% 解题率、推理成本 +20–23%、LLM 生成未精修文件 -0.5–2%；结论是保持最小化
+
+## 社区讨论
+
+- [HN: Feature Request — Support AGENTS.md](https://news.ycombinator.com/item?id=49367350) — `.cursor/rules` vs `CLAUDE.md`；实测整体转发（"Read AGENTS.md"）会被模型随机忽略
 
 ## 贡献
 
-欢迎提交：新技术栈模板、可组合片段、真实案例、翻译、检测规则。见 [CONTRIBUTING.md](CONTRIBUTING.md)。
-
-## 致谢
-
-本仓库的最佳实践提炼自 Claude Code 作者团队、GitHub 官方对 2,500+ 仓库的分析、Builder.io、Superconductor 与 ETH Zurich 实证研究，全部出处见 [docs/research-sources.md](docs/research-sources.md)。
+欢迎提交：清单新链接、新技术栈模板、可组合片段、真实案例、检测规则。见 [CONTRIBUTING.md](CONTRIBUTING.md)；全部引用来源见 [docs/research-sources.md](docs/research-sources.md)。
 
 ## License
 

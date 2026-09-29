@@ -1,7 +1,7 @@
 # AGENTS.md — {{PROJECT_NAME}}
 
 > 给 AI 编程代理的项目说明书：命令放最前、边界写清楚、保持精简。
-> 生成自 [AGENTS.md 模板库](https://github.com/YOUR_GITHUB_NAME/AGENTS.md)，请按项目实情修改。
+> 生成自 [AGENTS.md 模板库](https://github.com/YuanyuanMa03/AGENTS.md)，请按项目实情修改。
 
 ## 项目背景
 

@@ -10,6 +10,7 @@ VERSION="0.1.0"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 TPL_DIR="$ROOT_DIR/templates"
+REMOTE_TPL_BASE="https://raw.githubusercontent.com/YuanyuanMa03/awesome-agents-md/main/templates"
 
 ASSUME_YES=0
 
@@ -81,6 +82,22 @@ ask_yn() {
   fi
 }
 
+# resolve_tpl_dir — pick the local templates/ dir, or fetch a standalone copy
+# (needed when the script runs straight from curl, where BASH_SOURCE is a fd).
+resolve_tpl_dir() {
+  if [[ -d $TPL_DIR ]]; then return 0; fi
+  if ! command -v curl >/dev/null 2>&1; then
+    err "templates not found next to the script and curl is unavailable — clone the repo instead: git clone https://github.com/YuanyuanMa03/awesome-agents-md.git"
+  fi
+  local tmp f
+  tmp="$(mktemp -d)"
+  for f in project.zh.md project.en.md snippets.zh.md snippets.en.md; do
+    curl -fsSL "$REMOTE_TPL_BASE/$f" -o "$tmp/$f" \
+      || err "failed to fetch template: $REMOTE_TPL_BASE/$f"
+  done
+  TPL_DIR="$tmp"
+}
+
 # esc_sed STRING — escape characters that are special inside s|...|...|.
 esc_sed() {
   local s=$1
@@ -125,6 +142,8 @@ cmd_init() {
     zh|en) ;;
     *) err "--lang must be zh or en" ;;
   esac
+
+  resolve_tpl_dir
 
   local base="$TPL_DIR/project.$lang.md"
   if [[ ! -f $base ]]; then err "base template not found: $base"; fi

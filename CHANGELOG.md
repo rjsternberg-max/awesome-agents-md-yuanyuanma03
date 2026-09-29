@@ -6,6 +6,8 @@
 
 ### Added
 
+- awesome 清单（中英双语 README）：官方规范 / 最佳实践 / 一手帖子 / 真实案例 / 工具 / 学术研究 / 社区讨论
+
 - 最佳实践十条（`docs/best-practices.md`），附实证来源（`docs/research-sources.md`）
 - 12 个反模式（`docs/anti-patterns.md`）
 - 记忆系统四种模式（`docs/memory-patterns.md`）

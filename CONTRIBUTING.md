@@ -6,11 +6,22 @@
 
 | 类型 | 怎么提交 | 要求 |
 |---|---|---|
+| 🔗 清单新链接 | 修改 `README.md` + `README.en.md`（成对），并补进 `docs/research-sources.md` | 见下方[收录标准](#提交新链接) |
 | 🧩 可组合片段 | 修改 `templates/snippets.zh.md` 和 `snippets.en.md`（成对） | 来自真实使用摩擦；可执行、可验证；不超过 15 行 |
 | 🏗 技术栈模板 | 新增 `templates/stacks/<stack>.md` | 遵循现有栈模板结构（背景/命令/结构/风格✅❌/测试/边界/PR）；命令必须真实可跑 |
 | 🌍 真实案例 | 用 issue 模板「案例提交」 | 仓库链接有效 + 1–3 个值得学的点 |
 | 🔍 检测规则 | 修改 `tools/amd.sh` 的 `cmd_check` | 误报率为零或极低；WARN 不阻断 CI，FAIL 必须是硬伤（密钥、整体转发） |
 | 🌐 翻译 | 新增 `README.<lang>.md` 或模板对应语言版 | 与英文/中文版内容同步 |
+
+## 提交新链接
+
+awesome 清单的价值取决于每条链接的质量。收录标准：
+
+1. **链接真实有效**——提交前自己打开确认过；
+2. **一句话说清价值**——不是标题复读，而是"它教会你什么"；
+3. **中英成对**——`README.md` 与 `README.en.md` 同步；
+4. **归类正确**——放进现有章节；确需新章节时在 PR 里说明理由；
+5. **不收录**：纯营销页、无实质内容的转载、需要登录才能看的页面。
 
 ## 质量红线（会被 CI 和 reviewer 拦下）
 
@@ -40,9 +51,9 @@ bash -n tools/amd.sh                                            # 语法检查�
 
 ## 维护者发布清单（Maintainer publish checklist）
 
-首次发布 GitHub 仓库前：
+首次发布已完成（2026-09-29）。此后每次发版：
 
-- [ ] 全局替换 `YOUR_GITHUB_NAME` 为实际 GitHub 用户名（README.md、README.en.md、project.zh.md、project.en.md、docs/real-world-examples.md）
-- [ ] `gh repo create AGENTS.md --public --source=. --push`（或网页创建后 `git remote add origin … && git push -u origin main`）
-- [ ] 在仓库 Settings → Pages / About 填写描述与 topics：`agents-md`、`claude-code`、`codex`、`cursor`、`best-practices`、`prompt-engineering`、`templates`
-- [ ] 打 tag：`git tag v0.1.0 && git push --tags`
+- [ ] 更新 `CHANGELOG.md`
+- [ ] `bash tools/amd.sh check templates/*.md templates/stacks/*.md` 0 FAIL、`npx -y markdownlint-cli .` 通过
+- [ ] `git tag vX.Y.Z && git push --tags`，然后在 GitHub 上发布 Release
+- [ ] 若改动了模板结构，同步更新 `amd.sh` 中的 `REMOTE_TPL_BASE` 拉取清单
