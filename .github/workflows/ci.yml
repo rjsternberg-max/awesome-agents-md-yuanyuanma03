@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Markdown lint
+        run: npx -y markdownlint-cli .
+
+      - name: Shellcheck amd.sh
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q shellcheck
+          shellcheck tools/amd.sh
+
+      - name: Self-check templates (amd check)
+        run: bash tools/amd.sh check templates/*.md templates/stacks/*.md
+
+      - name: Smoke-test the generator
+        run: |
+          tmp="$(mktemp -d)"
+          cd "$tmp"
+          bash "$GITHUB_WORKSPACE/tools/amd.sh" init --yes --with-pr-checklist
+          bash "$GITHUB_WORKSPACE/tools/amd.sh" init --yes --lang en --force
+          bash "$GITHUB_WORKSPACE/tools/amd.sh" check AGENTS.md
