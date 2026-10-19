@@ -53,6 +53,7 @@ bash awesome-agents-md/tools/amd.sh check   # 体检现有 AGENTS.md
 - [Improve your AI code output with AGENTS.md](https://www.builder.io/blog/agents-md) — Builder.io：单文件命令、第二次犯错才写规则、指向真实示例文件、嵌套 AGENTS.md
 - [Anatomy of our CLAUDE.md file](https://www.superconductor.com/blog/anatomy-of-claude-md) — Superconductor：9 节结构模板，快慢命令分档，"越短越好"
 - [Agent Skills vs Rules Files vs Retrieved Context](https://getunblocked.com/blog/agent-skills-vs-rules-files/) — getunblocked：规则文件 vs Skills vs 检索式上下文的取舍；Cursor 建议规则 <500 行
+- [AGENTS.md vs CLAUDE.md](https://rigfit-harness.vercel.app/agents-md-vs-claude-md/) — RigFit：Claude Code、Codex、OpenCode、goose、Aider、Gemini CLI 各自读取哪个指令文件、优先级与回退规则（如 Codex 默认 32 KiB 上限），并给出单一来源写法；每条链接官方文档并标注核对日期
 - [本仓库中文实践](docs/best-practices.md) — 上述内容的中文提炼，附 [反模式](docs/anti-patterns.md) 与 [记忆系统模式](docs/memory-patterns.md)
 
 ## 一手帖子（X/Twitter）

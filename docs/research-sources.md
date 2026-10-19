@@ -18,6 +18,7 @@
 | GitHub 官方博客：2,500+ 仓库分析（Matt Nigh, 2025-11） | 命令写最前；代码示例胜过描述；✅/⚠️/🚫 三级边界；never-delete-a-test；六大板块 | [github.blog](https://github.blog/ai-and-ml/github-copilot/how-to-write-a-great-agents-md-lessons-from-over-2500-repositories/) |
 | Builder.io《Improve your AI code output with AGENTS.md》 | 单文件命令；第二次犯错触发规则；指向真实示例文件；嵌套 AGENTS.md；最小可用版本 | [builder.io/blog/agents-md](https://www.builder.io/blog/agents-md) |
 | getunblocked《Agent Skills vs Rules Files vs Retrieved Context》 | AGENTS.md 标准已被 60,000+ 开源项目采用；Cursor 建议规则 <500 行 | [getunblocked.com](https://getunblocked.com/blog/agent-skills-vs-rules-files/) |
+| RigFit《AGENTS.md vs CLAUDE.md》(2026-10) | 各 harness 指令文件发现顺序、回退与大小限制；单一来源 @AGENTS.md 导入写法 | [rigfit-harness.vercel.app](https://rigfit-harness.vercel.app/agents-md-vs-claude-md/) |
 
 ## 学术研究
 

@@ -41,6 +41,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/YuanyuanMa03/awesome-agents-
 - [Improve your AI code output with AGENTS.md](https://www.builder.io/blog/agents-md) — Builder.io: file-scoped commands, add-a-rule-on-the-second-mistake, point at real example files, nested files
 - [Anatomy of our CLAUDE.md file](https://www.superconductor.com/blog/anatomy-of-claude-md) — Superconductor: the 9-section structure, fast/slow command tiers
 - [Agent Skills vs Rules Files vs Retrieved Context](https://getunblocked.com/blog/agent-skills-vs-rules-files/) — rules vs skills vs retrieved context; Cursor's <500-line guidance
+- [AGENTS.md vs CLAUDE.md](https://rigfit-harness.vercel.app/agents-md-vs-claude-md/) — RigFit: which instruction file Claude Code, Codex, OpenCode, goose, Aider and Gemini CLI read, precedence and fallback rules (e.g. Codex's 32 KiB default), and a single-source setup; each claim links official docs with a check date
 
 ## First-hand posts
 
